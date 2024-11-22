@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Altın Günü Geri Sayım ve Değişim Talebi</title>
+    <title>Altın Günü Geri Sayım ve Değişim Talep</title>
 
-    <!-- CSS Kodu Buraya Ekleniyor -->
     <style>
         * {
             margin: 0;
@@ -19,10 +18,10 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
             text-align: center;
-            padding: 20px;
+            flex-direction: column;
         }
 
         .container {
@@ -32,6 +31,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -41,7 +41,7 @@
         }
 
         .dropdown {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         select {
@@ -64,67 +64,47 @@
             font-size: 1.2rem;
         }
 
-        #request-section {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ff9900;
-        }
-
-        #request-section label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        #request-section select {
-            margin-bottom: 15px;
-        }
-
-        #request-section button {
-            background-color: #ff9900;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #request-section button:hover {
-            background-color: #e68a00;
+        .request-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
         }
 
         #request-list {
             margin-top: 20px;
-            font-size: 1.2rem;
-            color: #333;
+            list-style-type: none;
         }
 
-        #request-list p {
-            background-color: #ffcc00;
-            padding: 10px;
+        #request-list li {
+            padding: 8px;
+            background-color: #ff9900;
+            color: white;
             border-radius: 5px;
             margin-bottom: 10px;
-            font-weight: bold;
+        }
+
+        #request-list li span {
+            margin-left: 10px;
+            font-weight: normal;
         }
 
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.5rem;
             }
-
-            .container {
+            .container, .request-container {
                 width: 90%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Altın Günü Geri Sayım ve Değişim Talebi</h1>
 
-        <!-- Geri Sayım Bölmesi -->
+    <div class="container">
+        <h1>Altın Günü Geri Sayım</h1>
         <div class="dropdown">
             <label for="person-select">Kişi Seçin:</label>
             <select id="person-select">
@@ -140,49 +120,46 @@
         <div id="countdown" class="countdown">
             <p>Seçilen kişinin altın günü için geri sayım burada görünecek.</p>
         </div>
-
-        <!-- Değişim Talebi Bölmesi -->
-        <div id="request-section">
-            <label for="person-change">Değişim Yapmak İsteyen Kişi:</label>
-            <select id="person-change">
-                <option value="ibrahim">İbrahim</option>
-                <option value="mehmet">Mehmet</option>
-                <option value="necip">Necip</option>
-                <option value="faruk">Faruk</option>
-                <option value="harun">Harun</option>
-                <option value="bilal">Bilal</option>
-                <option value="kadir">Kadir Çalışkan</option>
-            </select>
-
-            <label for="person-to-change">Değişim Yapılacak Kişi:</label>
-            <select id="person-to-change">
-                <option value="ibrahim">İbrahim</option>
-                <option value="mehmet">Mehmet</option>
-                <option value="necip">Necip</option>
-                <option value="faruk">Faruk</option>
-                <option value="harun">Harun</option>
-                <option value="bilal">Bilal</option>
-                <option value="kadir">Kadir Çalışkan</option>
-            </select>
-
-            <button id="submit-request">Talep Gönder</button>
-        </div>
-
-        <!-- Talep Listesi -->
-        <div id="request-list">
-            <h3>Talep Listesi:</h3>
-            <div id="requests"></div>
-        </div>
     </div>
 
-    <!-- JavaScript Kodu Buraya Ekleniyor -->
+    <div class="request-container">
+        <h1>Değişim Talebi</h1>
+        <div class="dropdown">
+            <label for="request-from">Değişim Yapmak İsteyen Kişi:</label>
+            <select id="request-from">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
+        </div>
+
+        <div class="dropdown">
+            <label for="request-to">Değişim Yapılacak Kişi:</label>
+            <select id="request-to">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
+        </div>
+
+        <button id="send-request">Talep Gönder</button>
+
+        <ul id="request-list">
+            <!-- Talepler buraya eklenecek -->
+        </ul>
+    </div>
+
     <script>
         const personSelect = document.getElementById('person-select');
         const countdownDisplay = document.getElementById('countdown');
-        const personChangeSelect = document.getElementById('person-change');
-        const personToChangeSelect = document.getElementById('person-to-change');
-        const submitRequestButton = document.getElementById('submit-request');
-        const requestList = document.getElementById('requests');
 
         const goldDates = {
             ibrahim: '2024-12-05T00:00:00',
@@ -194,11 +171,20 @@
             kadir: '2025-06-05T00:00:00'
         };
 
-        let requests = [];
+        const requestFromSelect = document.getElementById('request-from');
+        const requestToSelect = document.getElementById('request-to');
+        const sendRequestButton = document.getElementById('send-request');
+        const requestList = document.getElementById('request-list');
+
+        let requests = JSON.parse(localStorage.getItem('requests')) || [];
 
         personSelect.addEventListener('change', updateCountdown);
-        submitRequestButton.addEventListener('click', submitRequest);
-        setInterval(updateCountdown, 1000);  // Her saniye geri sayımı güncelle
+        sendRequestButton.addEventListener('click', handleRequest);
+
+        // Sayfa yüklendiğinde talepleri yükle
+        window.onload = function() {
+            loadRequests();
+        }
 
         function updateCountdown() {
             const selectedPerson = personSelect.value;
@@ -219,25 +205,32 @@
             countdownDisplay.innerHTML = `<p>${selectedPerson.charAt(0).toUpperCase() + selectedPerson.slice(1)}'in altın gününe ${days} gün, ${hours} saat, ${minutes} dakika kaldı!</p>`;
         }
 
-        function submitRequest() {
-            const personChange = personChangeSelect.value;
-            const personToChange = personToChangeSelect.value;
+        function handleRequest() {
+            const fromPerson = requestFromSelect.value;
+            const toPerson = requestToSelect.value;
 
-            if (personChange === personToChange) {
-                alert('Bir kişi kendisiyle değişim yapamaz!');
+            // Kendisiyle değişim talep etmesini engelle
+            if (fromPerson === toPerson) {
+                alert("Kendinizle değişim talep edemezsiniz!");
                 return;
             }
 
-            const requestMessage = `${personChange.charAt(0).toUpperCase() + personChange.slice(1)}, ${personToChange.charAt(0).toUpperCase() + personToChange.slice(1)} ile değişim yapmak istiyor.`;
-            requests.push(requestMessage);
-            displayRequests();
+            const request = `${fromPerson.charAt(0).toUpperCase() + fromPerson.slice(1)} kişi, ${toPerson.charAt(0).toUpperCase() + toPerson.slice(1)} ile değişim yapmak istiyor.`;
+
+            requests.push(request);
+
+            // Talepleri localStorage'a kaydet
+            localStorage.setItem('requests', JSON.stringify(requests));
+
+            // Talepleri ekrana yansıt
+            loadRequests();
         }
 
-        function displayRequests() {
-            requestList.innerHTML = '<h3>Talep Listesi:</h3>';
+        function loadRequests() {
+            requestList.innerHTML = ''; // Önceki talepleri temizle
             requests.forEach(request => {
-                const requestElement = document.createElement('p');
-                 requestElement.textContent = request;
+                const requestElement = document.createElement('li');
+                requestElement.textContent = request;
                 requestList.appendChild(requestElement);
             });
         }
