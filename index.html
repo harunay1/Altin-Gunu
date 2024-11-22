@@ -4,66 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Altın Günü Geri Sayım</title>
+
+    <!-- CSS Kodu Buraya Ekleniyor -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #fdf6e3;
-            color: #444;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffcc00, #ff9900);
+            color: #333;
             display: flex;
-            flex-direction: column;
             justify-content: center;
+            align-items: center;
             height: 100vh;
+            text-align: center;
         }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        #countdown {
             font-size: 2rem;
-            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff9900;
         }
-        footer {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #888;
+
+        .dropdown {
+            margin-bottom: 30px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ff9900;
+            background-color: #fff4cc;
+            cursor: pointer;
+        }
+
+        #countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff9900;
+        }
+
+        #countdown p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Altın Günü'ne Geri Sayım</h1>
-    <div id="countdown">Yükleniyor...</div>
-    <footer>05 Aralık 2024'te görüşmek üzere!</footer>
+    <div class="container">
+        <h1>Altın Günü Geri Sayım</h1>
+        <div class="dropdown">
+            <label for="person-select">Kişi Seçin:</label>
+            <select id="person-select">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
+        </div>
+        <div id="countdown" class="countdown">
+            <p>Seçilen kişinin altın günü için geri sayım burada görünecek.</p>
+        </div>
+    </div>
 
+    <!-- JavaScript Kodu Buraya Ekleniyor -->
     <script>
-        // Geri sayım tarihi
-        const targetDate = new Date("2024-12-05T00:00:00").getTime();
+        const personSelect = document.getElementById('person-select');
+        const countdownDisplay = document.getElementById('countdown');
 
-        // Geri sayımı güncelleme fonksiyonu
+        const goldDates = {
+            ibrahim: '2024-12-05T00:00:00',
+            mehmet: '2025-01-05T00:00:00',
+            necip: '2025-02-05T00:00:00',
+            faruk: '2025-03-05T00:00:00',
+            harun: '2025-04-05T00:00:00',
+            bilal: '2025-05-05T00:00:00',
+            kadir: '2025-06-05T00:00:00'
+        };
+
+        personSelect.addEventListener('change', updateCountdown);
+
         function updateCountdown() {
-            const now = new Date().getTime();
-            const timeLeft = targetDate - now;
+            const selectedPerson = personSelect.value;
+            const targetDate = new Date(goldDates[selectedPerson]);
+            const now = new Date();
 
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            const diff = targetDate - now;
 
-                document.getElementById("countdown").textContent = 
-                    `${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`;
-            } else {
-                document.getElementById("countdown").textContent = "Altın Günü Başladı!";
+            if (diff <= 0) {
+                countdownDisplay.innerHTML = `<p>${selectedPerson.charAt(0).toUpperCase() + selectedPerson.slice(1)}'in altın günü geldi!</p>`;
+                return;
             }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            countdownDisplay.innerHTML = `<p>${selectedPerson.charAt(0).toUpperCase() + selectedPerson.slice(1)}'in altın gününe ${days} gün, ${hours} saat, ${minutes} dakika kaldı!</p>`;
         }
-
-        // Her saniye geri sayımı güncelle
-        setInterval(updateCountdown, 1000);
-
-        // Sayfa yüklendiğinde geri sayımı başlat
-        updateCountdown();
     </script>
 </body>
 </html>
