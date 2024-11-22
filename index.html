@@ -227,13 +227,17 @@
         }
 
         function loadRequests() {
-            requestList.innerHTML = ''; // Önceki talepleri temizle
+            // Listeyi temizle
+            requestList.innerHTML = '';
+
+            // Her bir talebi listeye ekle
             requests.forEach(request => {
-                const requestElement = document.createElement('li');
-                requestElement.textContent = request;
-                requestList.appendChild(requestElement);
+                const li = document.createElement('li');
+                li.innerHTML = request;
+                requestList.appendChild(li);
             });
         }
     </script>
+
 </body>
 </html>
