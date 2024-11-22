@@ -1,183 +1,246 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Altın Günü Geri Sayım</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    .container {
-      text-align: center;
-      padding: 50px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      font-size: 2em;
-    }
-    .countdown {
-      font-size: 2.5em;
-      margin: 20px 0;
-    }
-    form input, form select, form button {
-      padding: 10px;
-      margin: 5px;
-      width: 80%;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    form button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    form button:hover {
-      background-color: #218838;
-    }
-    #messagesContainer {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: #f8f9fa;
-      border-radius: 8px;
-    }
-    .messageBox {
-      padding: 10px;
-      background-color: #d1e7dd;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      font-size: 1em;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altın Günü Geri Sayım ve Değişim Talebi</title>
+
+    <!-- CSS Kodu Buraya Ekleniyor -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffcc00, #ff9900);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ff9900;
+        }
+
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ff9900;
+            background-color: #fff4cc;
+            cursor: pointer;
+        }
+
+        #countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff9900;
+        }
+
+        #countdown p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        #request-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ff9900;
+        }
+
+        #request-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        #request-section select {
+            margin-bottom: 15px;
+        }
+
+        #request-section button {
+            background-color: #ff9900;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #request-section button:hover {
+            background-color: #e68a00;
+        }
+
+        #request-list {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        #request-list p {
+            background-color: #ffcc00;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Altın Günü Geri Sayım ve Değişim Talebi</h1>
 
-  <div class="container">
-    <h1>Altın Günü Geri Sayım</h1>
-    <div id="countdown" class="countdown">Yükleniyor...</div>
+        <!-- Geri Sayım Bölmesi -->
+        <div class="dropdown">
+            <label for="person-select">Kişi Seçin:</label>
+            <select id="person-select">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
+        </div>
+        <div id="countdown" class="countdown">
+            <p>Seçilen kişinin altın günü için geri sayım burada görünecek.</p>
+        </div>
 
-    <!-- Sıra Değişikliği İsteği Formu -->
-    <h2>Sıra Değişikliği Talebi</h2>
-    <form id="changeRequestForm">
-      <select id="senderSelect">
-        <option value="Ibrahim">İbrahim</option>
-        <option value="Mehmet">Mehmet</option>
-        <option value="Necip">Necip</option>
-        <option value="Faruk">Faruk</option>
-        <option value="Harun">Harun</option>
-        <option value="Bilal">Bilal</option>
-        <option value="Kadir">Kadir</option>
-      </select>
+        <!-- Değişim Talebi Bölmesi -->
+        <div id="request-section">
+            <label for="person-change">Değişim Yapmak İsteyen Kişi:</label>
+            <select id="person-change">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
 
-      <select id="receiverSelect">
-        <option value="Ibrahim">İbrahim</option>
-        <option value="Mehmet">Mehmet</option>
-        <option value="Necip">Necip</option>
-        <option value="Faruk">Faruk</option>
-        <option value="Harun">Harun</option>
-        <option value="Bilal">Bilal</option>
-        <option value="Kadir">Kadir</option>
-      </select>
+            <label for="person-to-change">Değişim Yapılacak Kişi:</label>
+            <select id="person-to-change">
+                <option value="ibrahim">İbrahim</option>
+                <option value="mehmet">Mehmet</option>
+                <option value="necip">Necip</option>
+                <option value="faruk">Faruk</option>
+                <option value="harun">Harun</option>
+                <option value="bilal">Bilal</option>
+                <option value="kadir">Kadir Çalışkan</option>
+            </select>
 
-      <button type="submit">Değişim Talebini Gönder</button>
-    </form>
+            <button id="submit-request">Talep Gönder</button>
+        </div>
 
-    <!-- Talep Mesajları -->
-    <div id="messagesContainer"></div>
-  </div>
+        <!-- Talep Listesi -->
+        <div id="request-list">
+            <h3>Talep Listesi:</h3>
+            <div id="requests"></div>
+        </div>
+    </div>
 
-  <!-- Firebase SDK ve Uygulama Kodu -->
-  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+    <!-- JavaScript Kodu Buraya Ekleniyor -->
+    <script>
+        const personSelect = document.getElementById('person-select');
+        const countdownDisplay = document.getElementById('countdown');
+        const personChangeSelect = document.getElementById('person-change');
+        const personToChangeSelect = document.getElementById('person-to-change');
+        const submitRequestButton = document.getElementById('submit-request');
+        const requestList = document.getElementById('requests');
 
-  <script>
-    // Firebase Konfigürasyonu
-    const firebaseConfig = {
-      apiKey: "AIzaSyCOMOAKE4-pQ-nZ790HWGtT05qPW4P5DKw",
-      authDomain: "altin-gunu.firebaseapp.com",
-      projectId: "altin-gunu",
-      storageBucket: "altin-gunu.firebasestorage.app",
-      messagingSenderId: "130532312451",
-      appId: "1:130532312451:web:fccdbf7fd839aa9c4762b6",
-      measurementId: "G-2RB3WGZJ3Y"
-    };
+        const goldDates = {
+            ibrahim: '2024-12-05T00:00:00',
+            mehmet: '2025-01-05T00:00:00',
+            necip: '2025-02-05T00:00:00',
+            faruk: '2025-03-05T00:00:00',
+            harun: '2025-04-05T00:00:00',
+            bilal: '2025-05-05T00:00:00',
+            kadir: '2025-06-05T00:00:00'
+        };
 
-    // Firebase'i Başlat
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+        let requests = [];
 
-    // Geri Sayım Tarihi (Firebaseten alınan tarih formatında belirleyelim)
-    const targetDate = new Date("2024-12-05T00:00:00Z");  // 5 Aralık 2024, UTC saat diliminde
+        personSelect.addEventListener('change', updateCountdown);
+        submitRequestButton.addEventListener('click', submitRequest);
+        setInterval(updateCountdown, 1000);  // Her saniye geri sayımı güncelle
 
-    // Geri Sayım Fonksiyonu
-    function updateCountdown() {
-      const now = new Date();
-      const timeDiff = targetDate - now;
+        function updateCountdown() {
+            const selectedPerson = personSelect.value;
+            const targetDate = new Date(goldDates[selectedPerson]);
+            const now = new Date();
 
-      if (timeDiff <= 0) {
-        document.getElementById("countdown").innerHTML = "Altın Günü Başladı!";
-        return;
-      }
+            const diff = targetDate - now;
 
-      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            if (diff <= 0) {
+                countdownDisplay.innerHTML = `<p>${selectedPerson.charAt(0).toUpperCase() + selectedPerson.slice(1)}'in altın günü geldi!</p>`;
+                return;
+            }
 
-      document.getElementById("countdown").innerHTML = `${days} Gün ${hours} Saat ${minutes} Dakika Kaldı`;
-    }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-    // Talep Gönderme Fonksiyonu
-    async function sendRequest(sender, receiver) {
-      try {
-        const docRef = await db.collection("change_requests").add({
-          sender: sender,
-          receiver: receiver,
-          timestamp: new Date()
-        });
-        console.log("Mesaj gönderildi ID: ", docRef.id);
-        alert("Değişim talebiniz başarıyla gönderildi!");
-        displayMessages(); // Yeni mesaj eklenince güncelle
-      } catch (e) {
-        console.error("Mesaj gönderme hatası: ", e);
-        alert("Mesaj gönderilirken bir hata oluştu.");
-      }
-    }
+            countdownDisplay.innerHTML = `<p>${selectedPerson.charAt(0).toUpperCase() + selectedPerson.slice(1)}'in altın gününe ${days} gün, ${hours} saat, ${minutes} dakika kaldı!</p>`;
+        }
 
-    // Firestore'dan Mesajları Al ve Göster
-    async function displayMessages() {
-      const snapshot = await db.collection("change_requests").orderBy("timestamp", "desc").get();
-      const container = document.getElementById("messagesContainer");
-      container.innerHTML = "";
+        function submitRequest() {
+            const personChange = personChangeSelect.value;
+            const personToChange = personToChangeSelect.value;
 
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("messageBox");
-        messageElement.textContent = `${data.sender} --> ${data.receiver} talebinde bulundu.`;
-        container.appendChild(messageElement);
-      });
-    }
+            if (personChange === personToChange) {
+                alert('Bir kişi kendisiyle değişim yapamaz!');
+                return;
+            }
 
-    // Form Submit
-    document.getElementById("changeRequestForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+            const requestMessage = `${personChange.charAt(0).toUpperCase() + personChange.slice(1)}, ${personToChange.charAt(0).toUpperCase() + personToChange.slice(1)} ile değişim yapmak istiyor.`;
+            requests.push(requestMessage);
+            displayRequests();
+        }
 
-      const sender = document.getElementById("senderSelect").value;
-      const receiver = document.getElementById("receiverSelect").value;
-
-      sendRequest(sender, receiver);
-    });
-
-    // Geri Sayım Güncelleme
-    setInterval(updateCountdown, 1000);
-
-    // Sayfa Yüklendiğinde Mesajları Göster
-    displayMessages();
-  </script>
+        function displayRequests() {
+            requestList.innerHTML = '<h3>Talep Listesi:</h3>';
+            requests.forEach(request => {
+                const requestElement = document.createElement('p');
+                 requestElement.textContent = request;
+                requestList.appendChild(requestElement);
+            });
+        }
+    </script>
 </body>
 </html>
